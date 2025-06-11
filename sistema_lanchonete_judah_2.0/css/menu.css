@@ -1,0 +1,270 @@
+/* Variáveis para facilitar o gerenciamento de cores */
+:root {
+    --orange-primary: #FF5722; /* Laranja principal do fundo */
+    --green-accent: #228B22;   /* Cor da onda verde (usando o valor do seu SVG) */
+    --white-accent: #FFFFFF;   /* Cor da onda branca (inferior) */
+    --yellow-orange-wave: #FFA500; /* Cor da onda amarela/laranja (usando o valor do seu SVG) */
+    --button-orange: #FF9800;  /* Fundo do botão */
+    --dark-text: #424242;      /* Para rodapé, ajuste se o texto principal precisar ser mais escuro */
+    --light-text: #F5F5F5;     /* Para texto principal sobre fundo laranja */
+}
+
+/* Base Styles */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--light-text);
+    overflow-x: hidden;
+}
+
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--orange-primary);
+    position: relative;
+}
+
+/* SVG Background Container e Formas */
+.background-svg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Garante que os SVGs fiquem atrás do conteúdo principal */
+    pointer-events: none; /* Permite que cliques passem através dos SVGs */
+}
+
+/* ONDA AMARELA/LARANJA (svg-yellow-wave) - Ajustes de Posicionamento */
+.svg-yellow-wave {
+    position: absolute;
+    top: 0; /* Ajuste para mover para cima/baixo */
+    left: 0; /* Ajuste para mover para a esquerda/direita */
+    width: 100%; /* Isso faz o SVG preencher a largura do container */
+    height: 460px; /* **Ajuste essa altura** para controlar o quanto da onda aparece */
+    fill: var(--yellow-orange-wave); /* Garante a cor correta */
+    z-index: 0; /* Já que está antes no HTML, pode ter um z-index igual ou menor que o verde */
+    transform: translateX(-400px) translateY(-5px); /* Ajuste este valor para mover a onda para cima ou para baixo */
+    /* Você pode precisar de transform: translateX() também se quiser mover horizontalmente */
+}
+
+/* ONDA VERDE (svg-green-wave) - Ajustes de Posicionamento */
+.svg-green-wave {
+    position: absolute;
+    top: 0; /* Ajuste para mover para cima/baixo */
+    left: 0; /* Ajuste para mover para a esquerda/direita */
+    width: 70%; /* Ajuste a largura para corresponder ao seu design (ou 100% se for para preencher) */
+    height: 350px; /* Ajuste a altura para controlar o quanto da onda aparece */
+    fill: var(--green-accent); /* Garante a cor correta */
+    z-index: 1; /* Garante que a onda verde fique ACIMA da amarela/laranja */
+    transform: translateX(-50px) translateY(-35px); /* Exemplo: move um pouco para a esquerda e para cima */
+    /* Jogue com esses valores (translateX, translateY) para posicionar exatamente */
+}
+
+
+/* Estilos do Cabeçalho */
+.header {
+    display: flex;
+    justify-content: flex-end; /* Alinha os botões à direita */
+    padding: 30px 50px;
+    position: relative; /* Garante que fique acima dos SVGs */
+    z-index: 10; /* Maior z-index que os SVGs */
+}
+
+.nav-buttons .btn {
+    background-color: var(--button-orange);
+    color: var(--white-accent);
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 30px; /* Mais arredondado como no design */
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 0.95em;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    white-space: nowrap; /* Impede que o texto do botão quebre linha */
+}
+
+.nav-buttons .btn:hover {
+    background-color: #FBC02D; /* Laranja mais claro ao passar o mouse */
+}
+
+/* Área de Conteúdo Principal */
+.main-content {
+    flex-grow: 1; /* Permite que ocupe o espaço vertical restante */
+    display: flex;
+    flex-direction: column; /* Padrão em coluna para mobile */
+    align-items: center; /* Centraliza itens horizontalmente em coluna */
+    justify-content: center; /* Centraliza conteúdo verticalmente */
+    padding: 40px 20px; /* Ajuste o preenchimento conforme necessário */
+    position: relative;
+    z-index: 5; /* Acima dos SVGs, abaixo do cabeçalho */
+    text-align: center; /* Centraliza o texto para mobile */
+}
+
+.text-block {
+    max-width: 600px; /* Limita a largura do texto */
+    margin-bottom: 40px; /* Espaço entre texto e imagem no mobile */
+    padding: 0 20px;
+}
+
+.text-block h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5.5em; /* Tamanho grande do título */
+    color: var(--white-accent);
+    line-height: 1;
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada */
+}
+
+.text-block p {
+    font-size: 1.15em;
+    color: var(--light-text);
+}
+
+.image-block {
+    text-align: center; /* Garante que a imagem esteja centralizada */
+    position: relative; /* Para posicionamento preciso em relação ao layout */
+    z-index: 6; /* A imagem pode precisar ficar ligeiramente acima da onda branca */
+}
+
+.image-block img {
+    max-width: 90%; /* Ajusta o tamanho para mobile */
+    height: auto;
+    display: block;
+}
+
+/* Estilos do Rodapé */
+.footer {
+    padding: 20px 40px;
+    text-align: right; /* Alinha o texto à direita */
+    font-size: 0.9em;
+    color: black; /* O texto do rodapé pode ser mais escuro para contraste no laranja */
+    position: relative;
+    z-index: 10; /* Garante que o rodapé esteja visível */
+    margin-top: auto; /* Empurra o rodapé para o final */
+}
+
+/* Ajustes Responsivos */
+@media (min-width: 768px) {
+    .header {
+        padding: 40px 80px;
+    }
+
+    .nav-buttons .btn {
+        padding: 15px 35px;
+        font-size: 1em;
+    }
+
+    .main-content {
+        flex-direction: row; /* Lado a lado para telas maiores */
+        justify-content: space-between; /* Espaça texto e imagem */
+        align-items: flex-start; /* Alinha ao topo */
+        padding: 80px 80px 40px 80px; /* Ajusta o preenchimento para desktop */
+    }
+
+    .text-block {
+        text-align: left; /* Alinha o texto à esquerda no desktop */
+        margin-right: 60px; /* Espaço entre texto e imagem */
+        margin-bottom: 0;
+        flex: 1; /* Permite que o bloco de texto cresça */
+    }
+
+    .text-block h1 {
+        font-size: 7em; /* Título ainda maior */
+    }
+
+    .text-block p {
+        font-size: 1.2em;
+    }
+
+    .image-block {
+        flex: 1; /* Permite que o bloco de imagem cresça */
+        max-width: 650px; /* Largura máxima para o container da imagem */
+        margin-top: 100px; /* Puxa a imagem para cima para sobrepor a área do cabeçalho */
+        margin-left: -45px; /* Ajusta para criar uma leve sobreposição com o texto ou posicione conforme necessário */
+        transform: translateX(0%); /* Reseta quaisquer transformações anteriores */
+    }
+
+    .image-block img {
+        max-width: 100%;
+        width: 100%; /* Garante que a imagem preencha seu container */
+        object-fit: contain; /* Garante que a imagem se ajuste corretamente sem cortar */
+    }
+
+    /* Ajusta posições/tamanhos dos SVGs para desktop */
+    .svg-green-wave {
+        width: 50%; /* Torna-o menos largo no desktop */
+        height: 400px;
+        top: 0;
+        left: -5%; /* Move ligeiramente para a esquerda para revelar mais da onda */
+    }
+
+    .svg-white-wave {
+        width: 70%; /* Ajusta a largura */
+        height: 600px;
+        bottom: -20%; /* Abaixa para expor mais do hambúrguer */
+        left: -10%; /* Move ligeiramente para a esquerda */
+    }
+
+    .footer {
+        padding: 30px 80px;
+    }
+}
+
+@media (max-width: 767px) {
+    .header {
+        padding: 20px;
+        justify-content: center; /* Centraliza os botões em telas pequenas */
+    }
+
+    .nav-buttons {
+        display: flex;
+        flex-wrap: wrap; /* Permite que os botões quebrem linha */
+        justify-content: center;
+        gap: 10px; /* Espaço entre os botões quebrados */
+    }
+
+    .nav-buttons .btn {
+        margin: 0; /* Remove margem horizontal */
+    }
+
+    .text-block h1 {
+        font-size: 3.5em; /* Título menor em telas muito pequenas */
+    }
+
+    .text-block p {
+        font-size: 1em;
+    }
+
+    .image-block {
+        margin-top: 0;
+        transform: none; /* Reseta quaisquer transformações de desktop */
+    }
+
+    /* Ajusta posições/tamanhos dos SVGs para mobile */
+    .svg-green-wave {
+        width: 100%;
+        height: 250px;
+    }
+
+    .svg-white-wave {
+        width: 100%;
+        height: 400px;
+        bottom: 0; /* Mantém na parte inferior */
+    }
+
+    .footer {
+        text-align: center;
+        padding: 20px;
+    }
+}
+
+/* Ajustes ainda menores para telas muito estreitas */
+@media (max-width: 480px) {
+    .text-block h1 {
+        font-size: 3em;
+    }
+}
